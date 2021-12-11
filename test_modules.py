@@ -1,4 +1,4 @@
-from .ECGDataset import ECGDataset
+from utils.ECGDataset import ECGDataset
 import torch
 import matplotlib.pyplot as plt
 import sklearn.metrics as metrics

@@ -5,8 +5,8 @@ from torch.utils.data import Dataset
 
 class ECGDataset(Dataset):
     def __init__(self, data_path, label_path):
-        self.X = np.load(path=data_path)
-        self.y = np.load(path=label_path)
+        self.X = np.load(data_path, allow_pickle=True)
+        self.y = np.load(label_path, allow_pickle=True)
 
         assert len(self.X) == len(self.y), "length should be same between input and label"
 
