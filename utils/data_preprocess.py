@@ -2,10 +2,15 @@ import os
 import numpy as np
 from .ECGXMLReader import ECGXMLReader
 
+# 디코딩 오류 나는 파일명, 디코딩 과정에서 직접 찾음
+starts_w6_t = ['1267', '1970', '3131', '3198', '3469', '3618', '4827', '4971', '4979', '5055']
+starts_w8_t = ['1879', '2164', '5580']
+starts_w8_v = ['7226', '7281', '8783']
+
 
 class DataPreprocess:
 
-    def __init__(self, path_arr, path_nor, data_filename='./data', label_filename='./label'):
+    def __init__(self, path_arr, path_nor, data_filename='./data', label_filename='./label', data_type='test'):
         self.name_list = []
         self.path_arr = path_arr
         self.path_nor = path_nor
@@ -17,8 +22,28 @@ class DataPreprocess:
         self.arr_list.sort()
         self.nor_list.sort()
 
+        # 오류 나는 파일명 제거
+        if data_type == 'train':
+            self.remove_possible_errors(self.arr_list)
+        elif data_type == 'valid':
+            self.remove_possible_errors(self.arr_list, False)
+
         self.decode_files()
         self.save_npy()
+
+    @staticmethod
+    def remove_possible_errors(files, is_train_set=True):
+        if is_train_set:
+            for index in starts_w6_t:
+                file = f'6_2_00{index}_ecg.xml'
+                files.remove(file)
+            for index in starts_w8_t:
+                file = f'8_2_00{index}_ecg.xml'
+                files.remove(file)
+        else:
+            for index in starts_w8_v:
+                file = f'8_2_00{index}_ecg.xml'
+                files.remove(file)
 
     @staticmethod
     def decode_file(filepath, names):

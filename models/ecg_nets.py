@@ -1,6 +1,8 @@
 import torch.nn as nn
 import torch.nn.functional as F
 
+"""https://github.com/lxdv/ecg-classification"""
+
 
 def conv_block(in_planes, out_planes, stride=1, groups=1, dilation=1):
     return nn.Conv1d(
@@ -23,16 +25,16 @@ class BasicBlockHeartNet(nn.Module):
     expansion = 1
 
     def __init__(
-        self,
-        inplanes,
-        planes,
-        stride=1,
-        downsample=None,
-        groups=1,
-        base_width=64,
-        dilation=1,
-        norm_layer=None):
-        
+            self,
+            inplanes,
+            planes,
+            stride=1,
+            downsample=None,
+            groups=1,
+            base_width=64,
+            dilation=1,
+            norm_layer=None):
+
         super(BasicBlockHeartNet, self).__init__()
         if norm_layer is None:
             norm_layer = nn.BatchNorm1d
@@ -75,15 +77,15 @@ class BasicBlock(nn.Module):
     expansion = 1
 
     def __init__(
-        self,
-        inplanes,
-        planes,
-        stride=1,
-        downsample=None,
-        groups=1,
-        base_width=64,
-        dilation=1,
-        norm_layer=None,
+            self,
+            inplanes,
+            planes,
+            stride=1,
+            downsample=None,
+            groups=1,
+            base_width=64,
+            dilation=1,
+            norm_layer=None,
     ):
         super(BasicBlock, self).__init__()
         if norm_layer is None:
@@ -125,15 +127,15 @@ class BasicBlock(nn.Module):
 
 class HeartNet(nn.Module):
     def __init__(
-        self,
-        layers=(1, 2, 2, 2, 2, 2, 2, 2, 1),
-        num_classes=1000,
-        zero_init_residual=False,
-        groups=1,
-        width_per_group=64,
-        replace_stride_with_dilation=None,
-        norm_layer=None,
-        block=BasicBlockHeartNet,
+            self,
+            layers=(1, 2, 2, 2, 2, 2, 2, 2, 1),
+            num_classes=1000,
+            zero_init_residual=False,
+            groups=1,
+            width_per_group=64,
+            replace_stride_with_dilation=None,
+            norm_layer=None,
+            block=BasicBlockHeartNet,
     ):
 
         super(HeartNet, self).__init__()
@@ -265,15 +267,15 @@ class HeartNet(nn.Module):
 
 class EcgResNet34(nn.Module):
     def __init__(
-        self,
-        layers=(1, 5, 5, 5),
-        num_classes=1000,
-        zero_init_residual=False,
-        groups=1,
-        width_per_group=64,
-        replace_stride_with_dilation=None,
-        norm_layer=None,
-        block=BasicBlock,
+            self,
+            layers=(1, 5, 5, 5),
+            num_classes=1000,
+            zero_init_residual=False,
+            groups=1,
+            width_per_group=64,
+            replace_stride_with_dilation=None,
+            norm_layer=None,
+            block=BasicBlock,
     ):
 
         super(EcgResNet34, self).__init__()
