@@ -25,19 +25,6 @@ class Train:
 
         self.y_pred_list = []
 
-    @staticmethod
-    def threshold(y_pred_list):
-        one_hot_list = []
-        thresholded_list = []
-        for x in y_pred_list:
-            if x >= 0.5:  # class 1
-                one_hot_list.append([0, 1])
-                thresholded_list.append(1)
-            else:
-                one_hot_list.append([1, 0])
-                thresholded_list.append(0)
-        return np.asarray(one_hot_list), thresholded_list
-
     def train_epoch(self, train_loader):
         self.model.train()
         avg_train_loss = 0
@@ -96,7 +83,8 @@ class Train:
             y_predicted = torch.cat([*self.y_pred_list], dim=0)
 
             y_target = ECGDataset(data_type='val').y
-            y_pred, y_predicted = self.threshold(y_predicted)
+
+            y_predicted = (y_predicted >= 0.5).float()  # threshold (round values)
 
             print("Area Under the Curve(AUC): ",
                   roc_auc_score(y_target, y_predicted))  # Compute Area Under the (ROC AUC) from prediction scores.
@@ -107,7 +95,7 @@ class Train:
             print(accuracy_score(y_target, y_predicted))
             print(recall_score(y_target, y_predicted))
             print(precision_score(y_target, y_predicted))
-            print(f1_score(y_target, y_predicted))  # 조화평균이라는데
+            print(f1_score(y_target, y_predicted))
             print()
 
         end.record()

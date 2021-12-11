@@ -4,14 +4,9 @@ from torch.utils.data import Dataset
 
 
 class ECGDataset(Dataset):
-    def __init__(self, data_type):
-        if data_type == 'train':
-            self.X = np.load('./data_np/train.npy')
-            self.y = np.load('./label_np/train.npy')
-
-        elif data_type == 'val':
-            self.X = np.load('./data_np/validation.npy')
-            self.y = np.load('./label_np/validation.npy')
+    def __init__(self, data_type, data_path, label_path):
+        self.X = np.load(path=data_path)
+        self.y = np.load(path=label_path)
 
         assert len(self.X) == len(self.y), "length should be same between input and label"
 
