@@ -10,14 +10,13 @@ import datetime
 
 def print_scores(y_target, y_predicted):
     # Compute Area Under the (ROC AUC) from prediction scores.
-    print("Area Under the Curve(AUC): ", roc_auc_score(y_target, y_predicted))
+    print("Area Under the Curve (AUC): ", roc_auc_score(y_target, y_predicted))
     # Compute average precision (AP) from prediction scores.
     print("Average Precision: ", average_precision_score(y_target, y_predicted))
-
-    print(accuracy_score(y_target, y_predicted))
-    print(recall_score(y_target, y_predicted))
-    print(precision_score(y_target, y_predicted))
-    print(f1_score(y_target, y_predicted))
+    print("Accuracy Score: ", accuracy_score(y_target, y_predicted))
+    print("Recall Score: ", recall_score(y_target, y_predicted))
+    print("Precision Score: ", precision_score(y_target, y_predicted))
+    print("F1 Score: ", f1_score(y_target, y_predicted))
 
 
 def plot_roc_curve(y_target, y_predicted, guideline=False, save_png=True):
@@ -47,8 +46,8 @@ def plot_roc_curve(y_target, y_predicted, guideline=False, save_png=True):
 def predict(model, data_path='./data.npy', label_path='./label.npy'):
     dataset = ECGDataset(data_path=data_path, label_path=label_path)
     y_pred_list = []
-    for i, X in enumerate(dataset):
-        y_pred = model(X)
+    for i in range(len(dataset)):
+        y_pred = model(dataset[i]['X'])
         y_pred_list.append(y_pred)
     y_predicted = torch.cat([*y_pred_list], dim=0)
     y_predicted = (y_predicted >= 0.5).float()  # threshold (round values)
