@@ -44,20 +44,13 @@ def plot_roc_curve(y_target, y_predicted, guideline=False, save_png=True):
     plt.show()
 
 
-class Test:
-    def __init__(self, model=None, data_path='./data.npy', label_path='./label.npy'):
-        self.model = model
-        self.dataset = ECGDataset(data_path=data_path, label_path=label_path)
-        self.y_pred_list = []
-
-    def predict(self, model):
-        if self.model is None:
-            self.model = model
-        self.y_pred_list = []
-        for i, X in enumerate(self.dataset):
-            y_pred = self.model(X)
-            self.y_pred_list.append(y_pred)
-        y_predicted = torch.cat([*self.y_pred_list], dim=0)
-        y_predicted = (y_predicted >= 0.5).float()  # threshold (round values)
-        y_target = self.dataset.y
-        return y_target, y_predicted
+def predict(model, data_path='./data.npy', label_path='./label.npy'):
+    dataset = ECGDataset(data_path=data_path, label_path=label_path)
+    y_pred_list = []
+    for i, X in enumerate(dataset):
+        y_pred = model(X)
+        y_pred_list.append(y_pred)
+    y_predicted = torch.cat([*y_pred_list], dim=0)
+    y_predicted = (y_predicted >= 0.5).float()  # threshold (round values)
+    y_target = dataset.y
+    return y_target, y_predicted
