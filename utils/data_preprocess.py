@@ -5,7 +5,7 @@ from .ECGXMLReader import ECGXMLReader
 
 class DataPreprocess:
 
-    def __init__(self, path_arr, path_nor, data_filename='data', label_filename='label'):
+    def __init__(self, path_arr, path_nor, data_filename='./data', label_filename='./label'):
         self.name_list = []
         self.path_arr = path_arr
         self.path_nor = path_nor

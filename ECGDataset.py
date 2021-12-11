@@ -4,7 +4,7 @@ from torch.utils.data import Dataset
 
 
 class ECGDataset(Dataset):
-    def __init__(self, data_type, data_path, label_path):
+    def __init__(self, data_path, label_path):
         self.X = np.load(path=data_path)
         self.y = np.load(path=label_path)
 
