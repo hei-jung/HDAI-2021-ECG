@@ -64,7 +64,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 from models.resnet import resnet34
 
 model = resnet34()
-model.load_state_dict(torch.load('./weights/epoch_100_model_trial_1', map_location=torch.device(device)))
+model.load_state_dict(torch.load('./final_trained_weights', map_location=torch.device(device)))
 
 # 전체 테스트 데이터셋에 대한 정답과 예측 결과를 반환합니다.
 y_target, y_predicted = predict(model, data_path='./valid_data.npy', label_path='./valid_label.npy')
