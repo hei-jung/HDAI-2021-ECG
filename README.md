@@ -45,7 +45,9 @@ DataPreprocess(path_arr='electrocardiogram/data/test/arrhythmia/',
 from test_modules import predict, print_scores, plot_roc_curve
 ```
 
-### predict(model, data_path='./data.npy', label_path='./label.npy') -> y_target, y_predicted
+### predict
+
+> model, data_path='./data.npy', label_path='./label.npy' -> *y_target, y_predicted*
 
 정답과 예측 결과를 함께 반환하는 메서드입니다.<br>
 이 메서드를 사용하기 위해서는 전처리 작업을 마친 npy 파일이 있어야 하고, 모델을 먼저 불러와야 합니다.
@@ -65,7 +67,9 @@ model.load_state_dict(torch.load('./weights/epoch_100_model_trial_1', map_locati
 y_target, y_predicted = predict(model, data_path='./valid_data.npy', label_path='./valid_label.npy')
 ```
 
-### print_scores(y_target, y_predicted, save_csv=True) -> None
+### print_scores
+
+> y_target, y_predicted, save_csv=True -> *None*
 
 score를 출력하는 메서드입니다. `save_csv=True`로 놓으면 score들이 csv 파일로 저장됩니다.
 
@@ -85,7 +89,9 @@ Precision Score             0.834154
 F1 Score                    0.904723
 ```
 
-### plot_roc_curve(y_target, y_predicted, guideline=False, save_png=True) -> None
+### plot_roc_curve
+
+> y_target, y_predicted, guideline=False, save_png=True -> *None*
 
 ROC 커브를 그려주는 메서드입니다. `save_png=True`로 놓으면 ROC 커브의 이미지가 png 파일로 저장됩니다.
 
