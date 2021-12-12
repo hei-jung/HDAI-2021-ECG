@@ -5,7 +5,7 @@ import torch.nn as nn
 from sklearn.metrics import roc_auc_score, average_precision_score, accuracy_score, recall_score, precision_score, \
     f1_score
 import wandb
-from ECGDataset import ECGDataset
+from utils.ECGDataset import ECGDataset
 
 
 class HyperParamConfig:
