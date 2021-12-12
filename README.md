@@ -100,12 +100,12 @@ ROC 커브를 그려주는 메서드입니다. `save_png=True`로 놓으면 ROC 
 plot_roc_curve(y_target, y_predicted, guideline=False)
 ```
 
-![wo_guideline](ROC_Curves/roc_curve_test1.png)
+![wo_guideline](ROC_Curves/roc_curve_test3.png)
 
 ```python
 plot_roc_curve(y_target, y_predicted, guideline=True)
 ```
 
-![w_guideline](ROC_Curves/roc_curve_test2.png)
+![w_guideline](ROC_Curves/roc_curve_test4.png)
 
 
