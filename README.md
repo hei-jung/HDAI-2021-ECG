@@ -32,7 +32,7 @@ B. 결과 요약지 : 첨부파일 양식 1. 결과 요약지(H.D.A.I 2021).doc 
 
 - `path_arr`과 `path_nor`는 각각 비정상 데이터와 정상 데이터가 저장된 경로입니다.
 - 전처리된 데이터는 넘파이 배열 파일인 `.npy` 파일로 저장되는데, `data_filename`과 `label_filename`은 저장하고 싶은 데이터 및 레이블의 파일명을 의미합니다.
-- `data_tye`은 'train', 'valid', 'test'로 세 가지 데이터의 종류에 맞춰 전처리 작업을 수행하도록 합니다.
+- `data_type`은 'train', 'valid', 'test'로 세 가지 데이터의 종류에 맞춰 전처리 작업을 수행하도록 합니다.
 
 ```python
 from utils.data_preprocess import DataPreprocess
