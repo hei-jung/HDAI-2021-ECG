@@ -1,5 +1,7 @@
-from utils.ECGDataset import ECGDataset
 import torch
+from torch import nn
+from utils.ECGDataset import ECGDataset
+from torch.utils.data import DataLoader
 import pandas as pd
 import matplotlib.pyplot as plt
 import sklearn.metrics as metrics
@@ -59,11 +61,14 @@ def plot_roc_curve(y_target, y_predicted, guideline=False, save_png=True):
     plt.show()
 
 
-def predict(model, data_path='./data.npy', label_path='./label.npy'):
+def predict(model, data_path, label_path):
     dataset = ECGDataset(data_path=data_path, label_path=label_path)
+    test_loader = DataLoader(dataset, batch_size=len(dataset), shuffle=False)
+    model.eval()
     y_pred_list = []
-    for i in range(len(dataset)):
-        y_pred = model(dataset[i]['X'])
+    for iter, batch in enumerate(test_loader):
+        X = batch['X']
+        y_pred = model(X)
         y_pred_list.append(y_pred)
     y_predicted = torch.cat([*y_pred_list], dim=0)
     y_predicted = (y_predicted >= 0.5).float()  # threshold (round values)
