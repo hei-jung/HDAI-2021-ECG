@@ -70,9 +70,9 @@ model.load_state_dict(torch.load('./weights/epoch_100_model_trial_1', map_locati
 y_target, y_predicted = predict(model, data_path='./valid_data.npy', label_path='./valid_label.npy')
 ```
 
-### print_scores(y_target, y_predicted) -> None
+### print_scores(y_target, y_predicted, save_csv=True) -> None
 
-score를 출력하는 메서드입니다.
+score를 출력하는 메서드입니다. `save_csv=True`로 놓으면 score들이 csv 파일로 저장됩니다.
 
 ```python
 print_scores(y_target, y_predicted)
@@ -81,29 +81,30 @@ print_scores(y_target, y_predicted)
 예상 결과:
 
 ```
-Area Under the Curve (AUC): 0.910897826268664
-Average Precision: 0.8297747025201556
-Accuracy Score: 0.904507100226384
-Recall Score: 0.9883355764917003
-Precision Score: 0.8341537296478606
-F1 Score: 0.9047227926078029
+                              Scores
+Area Under the Curve (AUC)  0.910898
+Average Precision           0.829775
+Accuracy Score              0.904507
+Recall Score                0.988336
+Precision Score             0.834154
+F1 Score                    0.904723
 ```
 
 ### plot_roc_curve(y_target, y_predicted, guideline=False, save_png=True) -> None
 
-ROC 커브를 그려주는 메서드입니다. `save_png=True`로 놓으면 ROC 커브의 이미지가 png 파일로 저장됩니다.<br>
+ROC 커브를 그려주는 메서드입니다. `save_png=True`로 놓으면 ROC 커브의 이미지가 png 파일로 저장됩니다.
 
 ```python
 plot_roc_curve(y_target, y_predicted, guideline=False)
 ```
 
-![wo_guideline](./roc_curve_20211212_032736.png)
+![wo_guideline](ROC_Curves/roc_curve_test1.png)
 
 ```python
 plot_roc_curve(y_target, y_predicted, guideline=True)
 ```
 
-![w_guideline](./roc_curve_20211212_032753.png)
+![w_guideline](ROC_Curves/roc_curve_test2.png)
 
 <!--## 간단한 사용 방법-->
 

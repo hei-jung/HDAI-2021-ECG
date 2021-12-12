@@ -1,5 +1,6 @@
 from utils.ECGDataset import ECGDataset
 import torch
+import pandas as pd
 import matplotlib.pyplot as plt
 import sklearn.metrics as metrics
 from sklearn.metrics import roc_auc_score, average_precision_score, accuracy_score, recall_score, precision_score, \
@@ -8,15 +9,30 @@ import os
 import datetime
 
 
-def print_scores(y_target, y_predicted):
-    # Compute Area Under the (ROC AUC) from prediction scores.
-    print("Area Under the Curve (AUC): ", roc_auc_score(y_target, y_predicted))
-    # Compute average precision (AP) from prediction scores.
-    print("Average Precision: ", average_precision_score(y_target, y_predicted))
-    print("Accuracy Score: ", accuracy_score(y_target, y_predicted))
-    print("Recall Score: ", recall_score(y_target, y_predicted))
-    print("Precision Score: ", precision_score(y_target, y_predicted))
-    print("F1 Score: ", f1_score(y_target, y_predicted))
+def print_scores(y_target, y_predicted, save_csv=True):
+    roc_auc = roc_auc_score(y_target, y_predicted)
+    avg_prec = average_precision_score(y_target, y_predicted)
+    acc = accuracy_score(y_target, y_predicted)
+    rec = recall_score(y_target, y_predicted)
+    prec = precision_score(y_target, y_predicted)
+    f1 = f1_score(y_target, y_predicted)
+
+    index = ['Area Under the Curve (AUC)',
+             'Average Precision',
+             'Accuracy Score',
+             'Recall Score',
+             'Precision Score',
+             'F1 Score']
+
+    scores = pd.DataFrame({'Scores': [roc_auc, avg_prec, acc, rec, prec, f1]}, index=index)
+    print(scores)
+
+    if save_csv:
+        if not os.path.isdir('./Scores/'):
+            os.mkdir('./Scores/')
+        now = datetime.datetime.now()
+        nowDatetime = now.strftime('%Y%m%d_%H%M%S')
+        scores.to_csv(f'./Scores/scores_{nowDatetime}.csv')
 
 
 def plot_roc_curve(y_target, y_predicted, guideline=False, save_png=True):
@@ -38,7 +54,7 @@ def plot_roc_curve(y_target, y_predicted, guideline=False, save_png=True):
             os.mkdir('./ROC_Curves/')
         now = datetime.datetime.now()
         nowDatetime = now.strftime('%Y%m%d_%H%M%S')
-        plt.savefig(f'roc_curve_{nowDatetime}.png', bbox_inches='tight')
+        plt.savefig(f'./ROC_Curves/roc_curve_{nowDatetime}.png', bbox_inches='tight')
 
     plt.show()
 
