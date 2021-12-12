@@ -16,6 +16,8 @@ matplotlib
 pandas
 ```
 
+Model Weight: [파일 링크](https://drive.google.com/drive/folders/1rJgsmdM_bg5WkNiRHxsE_6rGhyU9hDW-?usp=sharing)
+
 ## 1. 데이터 전처리
 
 저희는 모든 입력 데이터를 (12, 4096) 형태로 바꾸고 이를 넘파이 배열 파일로 저장하도록 전처리 작업을 수행하였습니다.<br>
