@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 
+"""https://github.com/onlyzdd/ecg-diagnosis.git"""
+
 
 class BasicBlock1d(nn.Module):
     expansion = 1
@@ -14,7 +16,7 @@ class BasicBlock1d(nn.Module):
         self.conv2 = nn.Conv1d(planes, planes, kernel_size=7, stride=1, padding=3, bias=False)
         self.bn2 = nn.BatchNorm1d(planes)
         self.downsample = downsample
-    
+
     def forward(self, x):
         residual = x
         out = self.conv1(x)
@@ -47,7 +49,7 @@ class ResNet1d(nn.Module):
         self.fc = nn.Linear(512 * block.expansion * 2, num_classes)
         self.dropout = nn.Dropout(0.2)
         self.sigmoid = nn.Sigmoid()
-    
+
     def _make_layer(self, block, planes, blocks, stride=1):
         downsample = None
         if stride != 1 or self.inplanes != planes * block.expansion:
