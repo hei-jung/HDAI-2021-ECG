@@ -11,11 +11,21 @@ A. AI 모델 제출 : 학습코드, 모델 Weight, 환경, 모델설명(1GB 미�
 B. 결과 요약지 : 첨부파일 양식 1. 결과 요약지(H.D.A.I 2021).doc 활용  
 ** *단, 결과요약지 내에 주제 1은 DSC/JI , 주제 2는 AUC 출력값이 보이도록 스크린샷 첨부* <br>
 
-**[TO-DO] source_arranged는 나중에 지울 것, ~~train.py~~랑 ~~전처리 코드 수정~~, ~~검증 코드 추가~~**
-
 # 실행 가이드
 
 ## 0. Requirements
+
+Python Version: `3.7.11`<br>
+PyTorch Version: `1.9.0+cu102`<br>
+
+Required Libraries:
+
+```
+xmltodict
+sklearn
+matplotlib
+pandas
+```
 
 모델 weights는 따로 구글 드라이브 링크 (추후에)
 
