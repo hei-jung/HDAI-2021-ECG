@@ -1,5 +1,10 @@
 # HDAI 2021 주제2: 심전도 데이터셋을 활용한 부정맥 진단 AI 모델
 
+### 팀 심장마스터
+
+|[Tonge-Shim](https://github.com/Tonge-Shim)|[hei-jung](https://github.com/hei-jung)|
+|:---:|:---:|
+
 # 실행 가이드
 
 ## 0. Requirements
